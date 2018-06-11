@@ -9,3 +9,14 @@ Most important files are within functions/js_modules:
 - **delete_card.js**: this delete a certain card stored under a customer object. WARNING: do not attempt to delete customer objects as all card information will be lost and a new customer object under the same ID will not be able to be created 
 - **get_card.js**: get card information of a customer object 
 - **receive_payment**: build a charge object with a destionation which contains the bank account / card to receive the payment money 
+
+
+## Deploying
+At the moment, this app is host locally at http://localhost:3000 
+To deploy, simply run: 
+```
+cd functions 
+$ node index.js 
+> Listening on port 3000! 
+``` 
+
