@@ -76,7 +76,11 @@ export class AddCardModal implements AfterViewInit, OnDestroy {
       let userID = this.uInfo.usrData.id;
       let getCustomerUrl = this.hostURL + "get_card";
       this.http.post(getCustomerUrl, {userID: userID}).subscribe(customer=> {
-          this.savedCard = customer.sources.data;
+          console.log("CUSTOMER OBJECT", customer);
+          if (customer.sources){
+              this.savedCard = customer.sources.data;
+          }
+          else this.savedCard = [];
           console.log("Saved card", this.savedCard);
       }, failCustomer => {
           console.log("Error getting customer card", failCustomer);
@@ -133,8 +137,21 @@ export class AddCardModal implements AfterViewInit, OnDestroy {
       let deleteCardURL = this.hostURL + "delete_card";
       this.http.post(deleteCardURL, card).subscribe(delete_success => {
           console.log("Successfully deleting card", delete_success);
+          let alert = this.alertCtrl.create({
+              title: 'Successfully Delete Card',
+              subTitle: 'Your card has been deleted',
+              buttons: ['Dismiss']
+          });
+          alert.present();
+
       }, delete_fail => {
           console.log("Fail to delete card", delete_fail);
+          let alert = this.alertCtrl.create({
+              title: 'Unable to delete card',
+              subTitle: 'Either your card has already been deleted or your account has been terminated',
+              buttons: ['Dismiss']
+          });
+          alert.present();
       });
   }
 
